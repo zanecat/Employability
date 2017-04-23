@@ -1,0 +1,66 @@
+﻿@using EmployabilityWebApp.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My Employability Web Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/angularjs")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-custom navbar-inverse navbar-fixed-top">
+        <div class="container header-container">
+            <div class="left-group">
+                <img class="logo" src="~/Image/unimelbIcon.png" alt=""/>
+                <div class="navbar-header custom-header">
+                    @Html.ActionLink("My Employability", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+                </div>
+            </div>
+            <div class="right-group">
+                <button type="button" class="navbar-toggle navBtn" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-collapse custom-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole(BasicUser.Role))
+                            {
+                                <li>@Html.ActionLink("Self Assessment", "Start", "SelfAssessment")</li>
+                            }
+                            else if (User.IsInRole(AdminUser.Role))
+                            {
+                                <li>@Html.ActionLink("Version Control", "Index", "SelfAssessment")</li>
+                            }
+                        }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My Employability Web Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/owlCarousel")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@using EmployabilityWebApp.ViewModels;
+@using JQueryUIHelpers;
+@model SimplifiedSurveyElementViewModel
+
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(m => m.Element.Id)
+
+    <div class="simplified-element">
+        <div class="simplified-element-header">
+            <span class="element-header-content">
+                @HttpUtility.HtmlEncode(Model.Element.Description)
+            </span>
+        </div>
+        <div class="simplified-element-options">
+            <div class="simplified-element-options-headers">
+                <div class="simplified-element-options-header">
+                    Strongly disagree
+                </div>
+                <div class="simplified-element-options-header">
+                    Disagree
+                </div>
+                <div class="simplified-element-options-header">
+                    Undecided
+                </div>
+                <div class="simplified-element-options-header">
+                    Agree
+                </div>
+                <div class="simplified-element-options-header">
+                    Strongly agree
+                </div>
+            </div>
+            <div class="simplified-element-options-slider">
+                @Html.JQueryUI().SliderFor(model => model.SubAnswer.Choice).Max(SimplifiedAnswerViewModel.MaxChoice).Min(SimplifiedAnswerViewModel.MinChoice).LabelStyle(SliderLabelStyle.None)
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+﻿@model SurveyViewModel
+
+@{
+    ViewBag.Title = "Filling out ";
+}
+
+@using EmployabilityWebApp.ViewModels
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var formOriginalData = $("#fillOutForm").serialize();
+
+        function unLoadWindow(event) {
+            if ($("#fillOutForm").serialize() !== formOriginalData) {
+                var dialogText =
+                    'Your answers are not saved.\n' +
+                    'If you leave page now, your will lose your answers.\n' +
+                    'If you want to save the answers, click \'Stay\' and submit your answers by \'Save\' button.\n' +
+                    'Do you want to leave this page now?';
+                event.returnValue = dialogText;
+                return dialogText;
+            }
+        }
+
+        window.onbeforeunload = unLoadWindow;
+
+        $('#fillOutForm').submit(function () {
+            if ($('#fillOutForm').valid()) {
+                window.onbeforeunload = null;
+            }
+        });
+    });
+</script>
+
+
+@using (Html.BeginForm("FillOut", "CoreSkill", FormMethod.Post, new { @id = "fillOutForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.CoreSkill.Id)
+
+
+    <div class="generic_root">
+        @Html.Partial("Survey/_NavSideBarPartial", Model.CoreSkillNavBarData)
+        <div class="core_content">
+            <div class="generic_header fillout_header">
+                @Html.DisplayFor(model => model.CoreSkill.Name)
+                @if (@TempData["Success"] != null && (bool)@TempData["Success"])
+                {
+                    <div class="success_msg">Your answer has been successfully saved</div>
+                }
+            </div>
+            <div>
+                <div class="generic_subtitle">@Html.DisplayFor(model => model.CoreSkill.Description)</div>
+
+               <div class="form-group">
+                    @{
+                        var nDetailed = 0;
+                        var nText = 0;
+                        var nSimplified = 0;
+                    }
+                    @foreach (var element in Model.SurveyElements.OrderBy(e => e.Element.Position))
+                    {
+                        if (element is DetailedSurveyElementViewModel)
+                        {
+                            ViewData.TemplateInfo.HtmlFieldPrefix = "DetailedSurveyElements[" + nDetailed + "]";
+                            nDetailed += 1;
+                            @Html.Partial("Survey/_DetailedSurveyElement", element as DetailedSurveyElementViewModel)
+                        }
+                        else if (element is TextSurveyElementViewModel)
+                        {
+                            ViewData.TemplateInfo.HtmlFieldPrefix = "TextSurveyElements[" + nText + "]";
+                            nText += 1;
+                            @Html.Partial("Survey/_TextSurveyElement", element as TextSurveyElementViewModel)
+                        }
+                        else if (element is SimplifiedSurveyElementViewModel)
+                        {
+                            ViewData.TemplateInfo.HtmlFieldPrefix = "SimplifiedSurveyElements[" + nSimplified + "]";
+                            nSimplified += 1;
+                            @Html.Partial("Survey/_SimplifiedSurveyElement", element as SimplifiedSurveyElementViewModel)
+                        }
+                    }
+                </div>
+
+                <div class="fillout_footer">
+                    <input type="submit" value="Save" class="btn btn-default submit-group"/>
+                    <button class="btn btn-default" type="button" onclick="location.href = '@Url.Action("Start", "SelfAssessment")'">
+                        Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+                        }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

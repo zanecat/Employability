@@ -1,0 +1,56 @@
+﻿@model EmployabilityWebApp.ViewModels.SelfAssessmentIndexData
+
+@{
+    ViewBag.Title = "SelfAssessments";
+}
+<div class="generic_root">
+    <div class="generic_header">
+        Self Assessments
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Details
+            </th>
+        </tr>
+
+        @foreach (var item in Model.SelfAssessments)
+        {
+            <tr class="">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="survey_footer">
+        <div class="footer_wrapper">
+            <button class="footer_btn" type="button" onclick="location.href = '@Url.Action("SummaryReport", "SelfAssessment", null)'">
+                Download Summary Report
+            </button>
+            @if (@TempData.ContainsKey("NoSelfAssessment") && (bool)@TempData["NoSelfAssessment"])
+            {
+                <div class="warning_msg">There is no self assessment in the system.</div>
+            }
+            else
+            {
+                <div class="warning_msg"></div>
+            }
+        </div>
+    </div>
+</div>

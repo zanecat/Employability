@@ -1,0 +1,51 @@
+﻿@model EmployabilityWebApp.ViewModels.CoreSkillNavBarData
+
+<div class="core_navbar">
+    <div class="core_nav_icon">
+        <span class="glyphicon glyphicon-list"></span>
+    </div>
+
+    <div class="core_nav_item">
+        Quick navigation
+    </div>
+
+    @foreach (var item in Model.CoreSkills.OrderBy(cs => cs.Id)
+        .Select((value, i) => new { i, value }))
+    {
+        <div class="core_nav_item">
+            @if (item.value.Id == Model.CurrentCoreSkillId)
+            {
+                <div class="core_nav_item_activelink">
+                    @item.value.Name
+                </div>
+            }
+            else if (item.value.IsFinished)
+            {
+                <div class="core_navlink">
+                    @Html.ActionLink(item.value.Name, "FillOut", "CoreSkill", new { id = item.value.Id }, null)
+                </div>
+            }
+            else
+            {
+                <div class="core_nav_red_link">
+                    @Html.ActionLink(item.value.Name, "FillOut", "CoreSkill", new {id = item.value.Id}, new { @style = "color:red;" })
+                </div>
+            }
+        </div>
+    }
+
+    <div class="core_backlink">
+        <div class="CoreNavItemActiveLink">
+            @Html.ActionLink("Give your feedback", "Create", "SaFeedbacks", new {id = Model.SelfAssessmentId}, null)
+        </div>
+    </div>
+
+    <div class="core_backlink">
+        <div class="CoreNavItemActiveLink">
+            <button class="btn btn-default" type="button" onclick="location.href = '@Url.Action("Start", "SelfAssessment")'">
+                Back
+            </button>
+        </div>
+    </div>
+
+</div>

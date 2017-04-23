@@ -1,0 +1,44 @@
+﻿@model IEnumerable<EmployabilityWebApp.ViewModels.FeedbackDetailData>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="generic_root">
+    <div class="generic_header">Feedbacks</div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.selfAssessmentTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="">
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.selfAssessmentTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

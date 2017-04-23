@@ -1,0 +1,69 @@
+﻿@model EmployabilityWebApp.ViewModels.SelfAssessmentDetailsData
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="generic_root">
+    <div class="generic_header">Survey Management</div>
+
+    <div class="sa-info">
+        <h3>Survey Information</h3>
+        <hr />
+        <div class="sa-info-row">
+            <div class="sa-info-name">
+                @Html.DisplayNameFor(model => model.SelfAssessment.Title)
+            </div>
+            <div class="sa-info-value">
+                @Html.DisplayFor(model => model.SelfAssessment.Title)
+            </div>
+        </div>
+
+        <div class="sa-info-row">
+            <div class="sa-info-name">
+                @Html.DisplayNameFor(model => model.SelfAssessment.Description)
+            </div>
+            <div class="sa-info-value">
+                @Html.DisplayFor(model => model.SelfAssessment.Description)
+            </div>
+        </div>
+
+        <div class="sa-info-footer">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.SelfAssessment.Id })
+        </div>
+    </div>
+
+    @if (Model.CoreSkills != null)
+    {
+        <h3>Core Skills</h3>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+
+            @foreach (var item in Model.CoreSkills)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink("Details", "Details", "CoreSkill", new { id = item.Id }, null)
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h3>There is no core skill in this self assessment survey.</h3>
+    }
+
+    <button class="btn btn-default" onclick="location.href = '@Url.Action("Index", "SelfAssessment")'">
+        Back
+    </button>
+</div>

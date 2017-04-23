@@ -1,0 +1,70 @@
+﻿@model EmployabilityWebApp.ViewModels.CoreSkillDetailedElementViewModel
+
+@{
+    ViewBag.Title = "CreateDetailedElement";
+}
+<div class="generic_root">
+    <div class="generic_header">Create</div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Detailed Element</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, "Focus Area Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { cols = "100%", rows = "5", htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+
+            @for (int i = 0; i < 5; i++)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DetailedOptions[i].Description, $"Stage {i + 1}", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.DetailedOptions[i].Description, new { cols = "100%", rows = "5", htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DetailedOptions[i].Description, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.HiddenFor(model => model.DetailedOptions[i].Position)
+                </div>
+            }
+
+            @Html.HiddenFor(model => model.CoreSkillId)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" onclick="HiddenValue();" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <button class="btn btn-default" onclick="location.href='@Url.Action("Details", "CoreSkill", new { id = ViewData["CoreSkillId"] })'">
+        Back
+    </button>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    function HiddenValue() {
+        var id = @Html.Raw(Json.Encode(ViewData["CoreSkillId"]));
+        document.getElementById('CoreSkillId').value = parseInt(id);
+
+        document.getElementById('DetailedOptions_0__Position').value = 1;
+        document.getElementById('DetailedOptions_1__Position').value = 2;
+        document.getElementById('DetailedOptions_2__Position').value = 3;
+        document.getElementById('DetailedOptions_3__Position').value = 4;
+        document.getElementById('DetailedOptions_4__Position').value = 5;
+
+    }
+</script>

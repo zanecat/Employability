@@ -1,0 +1,595 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding: 0 0;
+}
+
+.header-container {
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    height: 50px;
+    justify-content: flex-start;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select {
+    max-width: 280px;
+}
+
+/* CSS classes for homepage slider area */
+.slider-area{
+	position: relative;
+	height: 600px
+}
+
+.slider .owl-theme .owl-controls {
+    position: relative;
+    text-align: center;
+}
+
+.slider .owl-pagination {
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    transform: translateX(-50%);
+}
+.slider .owl-theme .owl-controls .owl-page span{
+	background: #fff
+}
+
+#bg-slider .item img{
+	width: 100%;
+    height: 600px;
+}
+
+.slider-cover {
+    position: absolute;
+    top: 17%;
+    width: 100%;
+    height: 300px;
+    background: white;
+    opacity: 0.8;
+}
+
+.slider-content{
+	position: absolute;
+	top: 20%;
+	left: 50%;
+    transform: translateX(-50%);
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 2.1428571435;
+    text-align: center;
+    background: transparent;
+}
+
+.slider-content h1 {
+  line-height: 1;
+}
+
+@media screen and (min-width: 1200px) {
+  .slider-content h1 {
+    font-size: 67px;
+  }
+}
+
+.slider-content p {
+  line-height: 1.4;
+}
+
+.slider-lead {
+  margin-bottom: 30px;
+  font-size: 16.099999999999998px;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+@media (min-width: 1200px) {
+  .slider-lead {
+    font-size: 26px;
+  }
+}
+
+/* CSS classes for navigation bar header */
+
+.navbar-custom {
+    background-color:#003366;
+}
+
+.custom-header {
+    margin-left: 20px !important;
+    font-weight: bold;
+}
+
+.left-group {
+    display: flex;
+}
+
+.right-group {
+    flex: 1;
+}
+
+.custom-collapse {
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+@media (min-width: 1200px) {
+    .navBtn {
+        display: none;
+    }
+}
+
+@media (max-width: 1199px) {
+    .navBtn {
+        display: block;
+    }
+
+    .left-group {
+        width: 100%;
+    }
+
+    .right-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        height: 390px;
+        overflow-y: visible;
+    }
+
+    .navBtn {
+        width: 44px;
+    }
+
+    .custom-header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .custom-collapse.in {
+        overflow-y: visible;
+        background: #003366;
+    }
+}
+
+.logo {
+    height: 44px;
+    margin-top: 6px;
+}
+
+/* CSS classes for self-assessment section navigation sidebar */
+
+.core_root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.core_content {
+    display: block;
+    padding-left: 50px;
+}
+
+.core_navbar {
+    z-index: 3;
+
+    position: fixed;
+    top: 50px;
+    left: 0;
+
+    display: block;
+    height: 100%;
+    width: 64px;
+
+    background: white;
+
+    border-right: 1px solid #eee;
+}
+
+.core_navbar div.core_nav_icon {
+    visibility: visible;
+    text-align: center;
+    padding: 1em;
+}
+
+.core_navbar div {
+    visibility: hidden;
+}
+
+.core_navbar:hover {
+    width: 20em;
+}
+
+.core_navbar:hover div {
+    visibility: visible;
+}
+
+.core_navbar:hover .core_nav_icon {
+    float: left;
+}
+
+.core_nav_item {
+    padding: 1em 0 1em 0.8em;
+    border-bottom: 1px solid #eee;
+}
+
+.core_nav_item_activelink {
+    color: #428bca;
+    font-weight: bolder;
+}
+
+.core_backlink {
+    padding-top: 1em;
+    padding-left: 0.8em;
+}
+
+.core_nav_red_link {
+    color: red;
+}
+/* CSS classes for self assessment management page */
+.footer_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CSS classes for survey index page */
+.generic_root {
+    padding: 20px;
+}
+
+.generic_header {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.generic_subtitle {
+    font-size: 17px;
+    font-weight: 500;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.survey_sections {
+    width: 75%;
+    margin: auto;
+    padding-top: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.survey_section {
+    width: 48%;
+    height: 350px;
+    margin-bottom: 20px;
+
+    background: white;
+    border: none;
+    border-bottom: 1px solid #6faee4;
+    outline: none;
+}
+
+.survey_section:active {
+    transform: translateY(2px);
+}
+
+.survey_section:hover {
+    background: #6faee4;
+}
+
+.survey_section:focus {
+    background: #6faee4;
+}
+
+.survey_section_content {
+    height: 100%;
+    padding: 30px 0;
+}
+
+.survey_section_logo {
+    width: 75px;
+    height: 75px;
+    margin: 30px 0;
+}
+
+.survey_section_title {
+    color: #036;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.survey_section:hover .survey_section_title {
+    color: white;
+}
+
+.survey_section:focus .survey_section_title {
+    color: white;
+}
+
+.survey_footer {
+    margin: auto;
+    margin-top: 40px;
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer_btn_wrapper {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer_btn {
+    border: 2px solid #6faee4;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 15px;
+    background: transparent;
+    color: #036;
+    font-size: 20px;
+    font-weight: bold;
+    height: 52px;
+}
+
+.footer_btn:hover {
+    background: #6faee4;
+    color: white;
+}
+
+.footer_btn:active {
+    transform: translateY(2px);
+}
+
+.warning_msg {
+    margin-top: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #cd5c5c;
+}
+
+/* CSS classes for survey fillout page */
+.fillout_header {
+    display: flex;
+    align-items: center;
+}
+
+.submit-group {
+    margin-right: 10px;
+}
+
+.success_msg {
+    margin-left: 50px;
+    text-align: center;
+
+    font-size: 15px;
+    font-weight: normal;
+    color: #468847;
+}
+
+.fillout_footer {
+    display: flex;
+}
+
+/* CSS classes for simplified elements */
+.simplified-element {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.simplified-element-header {
+    width: 30%;
+    padding: 5px 10px;
+}
+
+.element-header-content {
+    white-space: pre-line;
+    font-weight: bold;
+}
+
+.simplified-element-options {
+    width: 70%;
+    padding: 5px 10px;
+}
+
+.simplified-element-options-headers {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.simplified-element-options-header {
+    width: 20%;
+    text-align: center;
+}
+
+.simplified-element-options-slider {
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+/* CSS classes for detialed elements */
+.element {
+    margin-bottom: 15px;
+}
+
+.element-header {
+    padding: 5px 10px;
+}
+
+.detailed-element-options {
+    padding: 5px 10px;
+}
+
+.detailed-element-option-header {
+    display: flex;
+    font-weight: bold;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.detailed-element-option-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.detailed-element-option-cell {
+    width: 19%;
+}
+
+/* CSS classes for text elements */
+.text-element-box {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+}
+
+.text-element-msg {
+    padding: 5px 10px;
+}
+
+.text-element-area textarea {
+    max-width: 100%;
+    resize: none;
+}
+
+/* CSS classes for about page */
+.about-text{
+    font-size: 16px;
+    text-align: justify;
+}
+
+/* CSS classes for self assessment detail page */
+.sa-info {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.sa-info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.sa-info-name {
+    width: 15%;
+    font-weight: bold;
+}
+
+.sa-info-value {
+    width: 84%;
+}
+
+.sa-info-footer {
+    margin-top: 10px;
+}
+
+/* CSS classes for core skill edit page */
+.core-edit-content {
+    padding: 0 50px;
+}
+
+.core-edit-header {
+    margin-bottom: 10px;
+}
+
+.core-edit-type {
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.core-edit-type-title {
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.core-edit-section {
+    margin-bottom: 5px;
+}
+
+.core-edit-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.header-row {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.fa-cell {
+    width: 68%;
+}
+
+.resource-cell {
+    width: 13%;
+}
+
+.action-cell {
+    width: 10%;
+}
+
+.detailed-fa-cell {
+    width: 19%
+}
+
+.option-cell {
+    width: 12%
+}
+
+.text-fa-cell {
+    width: 88%;
+}
+
+.core-edit-type-footer {
+    padding: 5px 0;
+}
+
+/* CSS classes for feedback page */
+.feedback-element {
+    margin-bottom: 10px;
+}
+
+.feedback-text-element {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.feedback-text-label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.feedback-text-box {
+    margin-bottom: 5px;
+}

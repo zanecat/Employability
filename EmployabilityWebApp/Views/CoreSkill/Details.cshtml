@@ -1,0 +1,133 @@
+﻿@model EmployabilityWebApp.ViewModels.CoreSkillDetailData
+
+@{
+    ViewBag.Title = "Core Skill Detail";
+}
+
+<div class="generic_root">
+    <div class="core-edit-header">
+        <div class="generic_header">@Html.DisplayFor(model => model.CoreSkill.Name)</div>
+        <div class="generic_subtitle">@Html.DisplayFor(model => model.CoreSkill.Description)</div>
+    </div>
+
+    <div class="core-edit-type">
+        <div class="core-edit-type-title">
+            Simplified Elements
+        </div>
+        @if (Model.SimplifiedElements != null && Model.SimplifiedElements.Count != 0)
+        {
+            <div class="core-edit-section">
+                <div class="core-edit-row header-row">
+                    <div class="fa-cell">Focus Areas</div>
+                    <div class="resource-cell">Resource</div>
+                    <div class="action-cell">Actions</div>
+                </div>
+                @foreach (var element in Model.SimplifiedElements)
+                {
+                    if (element == null)
+                    {
+                        continue;
+                    }
+                    <div class="core-edit-row">
+                        <div class="fa-cell">
+                            @element.Description
+                        </div>
+                        <div class="resource-cell">
+                            <a href="">Resources</a>
+                        </div>
+                        <div class="action-cell">
+                            @Html.ActionLink("Edit", "EditSimplifiedElement", "Element", new {id = element.Id, coreSkillId = ViewData["CoreSkillId"]}, null) |
+                            @Html.ActionLink("Delete", "DeleteSimplifiedElement", "Element", new {id = element.Id, coreSkillId = ViewData["CoreSkillId"]}, null)
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <div class="core-edit-type-footer">
+            @Html.ActionLink("Add simplified element", "CreateSimplifiedElement", "Element", new {id = Model.CoreSkill.Id, prev_action = "Details"}, null)
+        </div>
+    </div>
+
+    <div class="core-edit-type">
+        <div class="core-edit-type-title">
+            Detailed Elements
+        </div>
+        @if (Model.DetailedElements != null && Model.DetailedElements.Count != 0)
+        {
+            <div class="core-edit-section">
+                <div class="core-edit-row header-row">
+                    <div class="detailed-fa-cell">Focus Areas</div>
+                    <div class="option-cell">Stage 1</div>
+                    <div class="option-cell">Stage 2</div>
+                    <div class="option-cell">Stage 3</div>
+                    <div class="option-cell">Stage 4</div>
+                    <div class="option-cell">Stage 5</div>
+                    <div class="action-cell">Actions</div>
+                </div>
+                @foreach (var element in Model.DetailedElements)
+                {
+                    if (element == null)
+                    {
+                        continue;
+                    }
+                    <div class="core-edit-row">
+                        <div class="detailed-fa-cell">
+                            @element.Description
+                        </div>
+                        @foreach (var option in element.DetailedOptions)
+                        {
+                            <div class="option-cell">
+                                @option.Description
+                            </div>
+                        }
+                        <div class="action-cell">
+                            @Html.ActionLink("Edit", "EditDetailedElement", "Element", new {id = element.Id, coreSkillId = ViewData["CoreSkillId"]}, null) |
+                            @Html.ActionLink("Delete", "DeleteDetailedElement", "Element", new {id = element.Id, coreSkillId = ViewData["CoreSkillId"]}, null)
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <div class="core-edit-type-footer">
+            @Html.ActionLink("Add detailed element", "CreateDetailedElement", "Element", new {id = Model.CoreSkill.Id, prev_action = "Details"}, null)
+        </div>
+    </div>
+
+    <div class="core-edit-type">
+        <div class="core-edit-type-title">
+            Text Elements
+        </div>
+        @if (Model.TextElements != null && Model.TextElements.Count != 0)
+        {
+            <div class="core-edit-section">
+                <div class="core-edit-row header-row">
+                    <div class="text-fa-cell">Description</div>
+                    <div class="action-cell">Actions</div>
+                </div>
+                @foreach (var element in Model.TextElements)
+                {
+                    if (element == null)
+                    {
+                        continue;
+                    }
+                    <div class="core-edit-row">
+                        <div class="text-fa-cell">
+                            @element.Description
+                        </div>
+                        <div class="action-cell">
+                            @Html.ActionLink("Edit", "EditTextElement", "Element", new {id = element.Id, coreSkillId = ViewData["CoreSkillId"]}, null) |
+                            @Html.ActionLink("Delete", "DeleteTextElement", "Element", new {id = element.Id, coreSkillId = ViewData["CoreSkillId"]}, null)
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <div class="core-edit-type-footer">
+            @Html.ActionLink("Add text element", "CreateTextElement", "Element", new {id = Model.CoreSkill.Id, prev_action = "Details"}, null)
+        </div>
+    </div>
+
+    <button class="btn btn-default" onclick="location.href = '@Url.Action("Details", "SelfAssessment", new {id = Model.CoreSkill.SelfAssessment.Id})'">
+        Back
+    </button>
+</div>

@@ -1,0 +1,50 @@
+﻿@model EmployabilityWebApp.ViewModels.CoreSkillIndexData
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="generic_root">
+    <div class="generic_header">
+        Self Assessment Sections
+    </div>
+    <div class="generic_subtitle">
+        This self-assessment exercise covers several skill areas that were identified by Australian employers as important for successful participation in work.
+    </div>
+
+    <div class="survey_sections">
+        @foreach (var item in Model.CoreSkills
+            .Select((value, i) => new { i, value }))
+        {
+            <button class="survey_section" type="button" onclick="location.href = '@Url.Action("FillOut", "CoreSkill", new { id = item.value.Id })'">
+                <div class="survey_section_content">
+                    <img class="survey_section_logo" src="@Url.Content("~/Image/CoreSkillIcon" + (item.i + 1) % 10 + ".png")"/>
+                    <div class="survey_section_title">
+                        @Html.DisplayFor(modelItem => item.value.Name)
+                    </div>
+                </div>
+            </button>
+        }
+    </div>
+
+    <div class="survey_footer">
+        <div class="footer_btn_wrapper">
+            <button class="footer_btn" type="button" onclick="location.href = '@Url.Action("Create", "SaFeedbacks", new {id = Model.SelfAssessmentId})'">
+                Give your feedback
+            </button>
+        </div>
+        <div class="footer_btn_wrapper">
+            <button class="footer_btn" type="button" onclick="location.href = '@Url.Action("SurveyReport", "SelfAssessment", new {id = Model.SelfAssessmentId})'">
+                Download Result Report
+            </button>
+            @if (@TempData.ContainsKey("NoAnswer") && (bool) @TempData["NoAnswer"])
+            {
+                <div class="warning_msg">Please fill the survey before downloading the result report.</div>
+            }
+            else
+            {
+                <div class="warning_msg"></div>
+            }
+        </div>
+    </div>
+</div>

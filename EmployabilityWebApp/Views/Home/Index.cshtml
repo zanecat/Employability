@@ -1,0 +1,56 @@
+﻿@using EmployabilityWebApp.Models
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#bg-slider").owlCarousel({
+            navigation: false,
+            slideSpeed: 100,
+            autoPlay: 3000,
+            paginationSpeed: 100,
+            singleItem: true,
+            mouseDrag: false,
+            transitionStyle: "fade"
+        });
+    });
+</script>
+
+<div class="slider-area">
+    <div class="slider">
+        <div id="bg-slider" class="owl-carousel owl-theme">
+            <div class="item">
+                <img src="~/Image/home-slide-1.jpg" alt="pic1">
+            </div>
+            <div class="item">
+                <img src="~/Image/home-slide-2.jpg" alt="pic2">
+            </div>
+            <div class="item">
+                <img src="~/Image/home-slide-3.jpg" alt="pic3">
+            </div>
+        </div>
+    </div>
+    <div class="slider-cover"></div>
+    <div class="slider-content">
+        <h1>My Employability</h1>
+        <div class="slider-lead"><br>Get a better understanding of your skills!<br></div>
+        @{
+            var url =
+                 !User.Identity.IsAuthenticated ? Url.Action("Login", "Account")
+                : User.IsInRole(BasicUser.Role) ? Url.Action("Start", "SelfAssessment")
+                : User.IsInRole(AdminUser.Role) ? Url.Action("Index", "SelfAssessment")
+                : null;
+            if (url != null)
+            {
+                <p>
+                    <a href=@url class="btn btn-primary btn-lg">
+                        @* Use aria-hidden and role=presentation to prevent screen readers from
+                            * reading out "right double angle quote". *@
+                        Start here <span aria-hidden="true" role="presentation">&raquo;</span>
+                    </a>
+                </p>
+            }
+        }
+    </div>
+</div>
